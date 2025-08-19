@@ -8,8 +8,15 @@ on:
 
 jobs:
   deploy:
-    uses: ../../action.yml
-    with:
-      aws_region: "us-east-1"
-      ecr_repo_name: "ark-hw-repo"
-      tf-directory: "tf"
+    name: Deploy to ECR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Execute
+        uses: ./
+        with:
+          aws_region: "us-east-1"
+          ecr_repo_name: "ark-hw-repo"
+          tf-directory: "tf"
