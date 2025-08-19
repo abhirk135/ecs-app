@@ -1,0 +1,15 @@
+name: Deploy ECR
+
+on:
+  push:
+    branches:
+        - assignment
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    uses: ./
+    with:
+      aws_region: "us-east-1"
+      ecr_repo_name: "ark-hw-repo"
+      tf-directory: "tf"
