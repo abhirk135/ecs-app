@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    uses: ./
+    uses: ./action.yml
     with:
       aws_region: "us-east-1"
       ecr_repo_name: "ark-hw-repo"
