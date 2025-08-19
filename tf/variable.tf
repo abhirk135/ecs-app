@@ -15,3 +15,22 @@ variable "ecr_image_tag" {
   type        = string
   default     = "latest"
 }
+
+variable "cluster_name" {
+  default = "ark-hw-cluster"
+}
+variable "service_name" {
+  default = "ark-hw-service"
+}
+variable "container_name" {
+  default = "ark-hw-container"
+}
+variable "container_port" {
+  default = 8080
+}
+variable "subnet_ids" {
+  type = list(string)
+}
+variable "security_group_ids" {
+  type = list(string)
+}
