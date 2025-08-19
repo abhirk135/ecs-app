@@ -2,13 +2,13 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-COPY requirements.txt ./
-COPY src/ ./src/
+COPY src/requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-ENV FLASK_APP=src/app.py
+COPY src/ ./app/
 
-EXPOSE 5000
 
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "src.app:app"]
+EXPOSE 8080
+
+CMD ["python", "app/app.py"]
