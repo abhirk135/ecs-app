@@ -11,5 +11,4 @@ ENV FLASK_APP=src/app.py
 
 EXPOSE 5000
 
-WORKDIR /app/src
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "src.app:app"]
