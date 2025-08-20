@@ -5,7 +5,7 @@ resource "aws_vpc" "ark_vpc" {
   }
 }
 
-resource "aws_subnet" "public" {
+resource "aws_subnet" "public_a" {
   vpc_id                  = aws_vpc.ark_vpc.id
   cidr_block              = local.public_a_subnet_cidr
   map_public_ip_on_launch = true
@@ -64,7 +64,7 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route_table_association" "public" {
-  subnet_id      = aws_subnet.public_a      .id
+  subnet_id      = aws_subnet.public_a.id
   route_table_id = aws_route_table.public.id
   depends_on = [aws_route_table.public, aws_subnet.public_a]
 }
