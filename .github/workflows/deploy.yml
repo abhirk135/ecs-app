@@ -27,17 +27,17 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build docker image
-        run: docker build -t ark-hw-repo:latest .
+        run: docker build -t ark-repo:latest .
 
       - name: Tag docker image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        run: docker tag ark-hw-repo:latest $ECR_REGISTRY/ark-hw-repo:latest
+        run: docker tag ark-repo:latest $ECR_REGISTRY/ark-repo:latest
 
       - name: Push docker image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        run: docker push $ECR_REGISTRY/ark-hw-repo:latest
+        run: docker push $ECR_REGISTRY/ark-repo:latest
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
