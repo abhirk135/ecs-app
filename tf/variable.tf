@@ -26,7 +26,7 @@ variable "container_name" {
   default = "ark-hw-container"
 }
 variable "container_port" {
-  default = 8080
+  default = 8081
 }
 variable "subnet_ids" {
   description = "List of subnet IDs for ECS tasks"
