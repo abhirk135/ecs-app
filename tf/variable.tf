@@ -29,8 +29,19 @@ variable "container_port" {
   default = 8080
 }
 variable "subnet_ids" {
-  type = list(string)
+  description = "List of subnet IDs for ECS tasks"
+  type        = list(string)
+  default     = [
+    "subnet-0c5f890519d4f7f7f",
+    "subnet-029f5515fc8771089",
+    "subnet-06abea096147f9567"
+  ]
 }
+
 variable "security_group_ids" {
-  type = list(string)
+  description = "List of security group IDs for ECS tasks"
+  type        = list(string)
+  default     = [
+    "sg-0fca373cc94c770ee"
+  ]
 }
