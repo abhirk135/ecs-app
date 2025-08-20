@@ -28,18 +28,8 @@ resource "aws_ecr_lifecycle_policy" "ark_lifecycle_policy" {
 
 #### Permissions setup for ECS ####################################
 resource "aws_iam_role" "ecs_task_execution" {
-  name = "ecsTaskExecutionRole"
+  name = "arkEcsTaskExecutionRole"
   assume_role_policy = data.aws_iam_policy_document.ecs_task_assume_role_policy.json
-}
-
-data "aws_iam_policy_document" "ecs_task_assume_role_policy" {
-  statement {
-    actions = ["sts:AssumeRole"]
-    principals {
-      type        = "Service"
-      identifiers = ["ecs-tasks.amazonaws.com"]
-    }
-  }
 }
 
 resource "aws_iam_role_policy_attachment" "ecs_task_execution_policy" {
@@ -94,10 +84,11 @@ resource "aws_ecs_service" "ark_service" {
     assign_public_ip = false
   }
 
-  depends_on = [
-    aws_iam_role_policy_attachment.ecs_task_execution_policy,
-    aws_subnet.private_a,
-    aws_subnet.private_b,
-    aws_security_group.alb
-  ]
+  load_balancer {
+    target_group_arn = aws_lb_target_group.app_tg.arn
+    container_name   = var.container_name
+    container_port   = var.container_port
+  }
+
+  depends_on = [aws_iam_role_policy_attachment.ecs_task_execution_policy, aws_lb_target_group.app_tg]
 }
