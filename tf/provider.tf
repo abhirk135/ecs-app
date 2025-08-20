@@ -5,7 +5,7 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket = "arkdev-tfstate"
-    key    = "ecs-app/terraform.tfstate"
+    key    = "hosting/terraform.tfstate"
     region = "us-east-1"
   }
 }

@@ -86,10 +86,18 @@ resource "aws_ecs_service" "ark_service" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    subnets          = var.subnet_ids
-    security_groups  = var.security_group_ids
-    assign_public_ip = true
+    subnets          = [
+      aws_subnet.private_a.id,
+      aws_subnet.private_b.id
+    ]
+    security_groups  = [aws_security_group.alb.id]
+    assign_public_ip = false
   }
 
-  depends_on = [aws_iam_role_policy_attachment.ecs_task_execution_policy]
+  depends_on = [
+    aws_iam_role_policy_attachment.ecs_task_execution_policy,
+    aws_subnet.private_a,
+    aws_subnet.private_b,
+    aws_security_group.alb
+  ]
 }

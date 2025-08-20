@@ -7,7 +7,7 @@ variable "aws_region" {
 variable "ecr_repo_name" {
   description = "ECR repository name"
   type        = string
-  default     = "ark-hw-repo"
+  default     = "ark-repo"
 }
 
 variable "ecr_image_tag" {
@@ -17,31 +17,39 @@ variable "ecr_image_tag" {
 }
 
 variable "cluster_name" {
-  default = "ark-hw-cluster"
+  description = "ECS cluster name"
+  type        = string
+  default     = "ark-cluster"
 }
+
 variable "service_name" {
-  default = "ark-hw-service"
+  description = "ECS service name"
+  type        = string
+  default     = "ark-service"
 }
+
 variable "container_name" {
-  default = "ark-hw-container"
+  description = "ECS container name"
+  type        = string
+  default     = "ark-container"
 }
+
 variable "container_port" {
-  default = 8081
+  description = "Container port"
+  type        = number
+  default     = 8081
 }
+
 variable "subnet_ids" {
   description = "List of subnet IDs for ECS tasks"
   type        = list(string)
-  default     = [
-    "subnet-0c5f890519d4f7f7f",
-    "subnet-029f5515fc8771089",
-    "subnet-06abea096147f9567"
-  ]
+  # Default can be empty, or set via terraform.tfvars after creation
+  default     = []
 }
 
 variable "security_group_ids" {
   description = "List of security group IDs for ECS tasks"
   type        = list(string)
-  default     = [
-    "sg-0fca373cc94c770ee"
-  ]
+  # Default can be empty, or set via terraform.tfvars after creation
+  default     = []
 }
