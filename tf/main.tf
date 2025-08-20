@@ -75,7 +75,7 @@ resource "aws_ecs_task_definition" "ark_task" {
 
 resource "aws_ecs_service" "ark_service" {
   name            = var.service_name
-  cluster         = aws_ecs_cluster.this.id
+#   cluster         = aws_ecs_cluster.this.id
   task_definition = aws_ecs_task_definition.ark_task.arn
   desired_count   = 1
   launch_type     = "FARGATE"
